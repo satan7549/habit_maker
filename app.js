@@ -1,4 +1,5 @@
 const express = require("express");
+const userRoutes = require("./routes/user.route");
 // const cors = require("cors");
 const app = express();
 // const ErrorHandlerMiddleware = require("./middleware/error");
@@ -12,13 +13,12 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Hello");
+    res.send("Hello");
 });
 
 /* import all routes */
-// const movie = require("./routes/movie.route");
+app.use("/user", userRoutes);
 
-// app.use("/movie", movie);
 
 // Middleware for Errors
 // app.use(ErrorHandlerMiddleware);
