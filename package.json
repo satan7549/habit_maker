@@ -1,0 +1,20 @@
+{
+  "name": "habit_maker",
+  "version": "1.0.0",
+  "description": "Project Name :- Habit Maker\r Project Description :-\r Company:- Furation \r Contibuter:- \r  1.) Jatin Patil\r  2.) Satan Sharma\r Manager:- Manish Sir",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "mongoose": "^7.3.0"
+  }
+}
