@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 
 // Define the user schema
 const userSchema = new mongoose.Schema({
@@ -33,6 +34,8 @@ const userSchema = new mongoose.Schema({
             required: true,
         },
     },
+    forgotPasswardToken: String,
+    forgotPasswardExpiry: Date,
     createdAt: {
         type: Date,
         default: Date.now(),
@@ -49,6 +52,22 @@ userSchema.methods.getjwtToken = function () {
 // Method to compare the user's password with a provided password
 userSchema.methods.comparePassword = async function (password) {
     return await bcrypt.compare(password, this.password);
+};
+
+//genearte forgot passoword token
+userSchema.methods.getForgotPasswordToken = async function () {
+    //generate a long and random string
+    const forgotToken = crypto.randomBytes(20).toString("hex");
+    //getting a hash - make sure hash on backend as well
+    this.forgotPasswardToken = crypto
+        .createHash("sha256")
+        .update(forgotToken)
+        .digest("hex");
+
+    //time of token
+    this.forgotPasswardExpiry = Date.now() + 20 * 60 * 1000;
+
+    return forgotToken;
 };
 
 // Create the User model
